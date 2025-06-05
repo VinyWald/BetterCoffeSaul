@@ -1,0 +1,46 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Ruda:wght@400..900&display=swap');
+@import "./navbar.css";
+@import "./buttons.css";
+@import "./background.css";
+@import "./input.css";
+@import "./position.css";
+@import "./colors.css";
+@import "./carousel.css";
+@import "./stars.css";
+@import "./utils.css";
+
+/*Color config */
+
+:root{
+   
+   /* --bg-orange:        #F46A05;
+    --bg-orange-hover:  #D85F08;
+    */
+    --bg-coffe:         #7f5539;
+    --bg-coffe-hd:      #ad8973;
+    --bg-coffe-md:      #b7927f;
+    --bg-coffe-lg:      #b1937d;
+    --bg-orange:        #7f5539;
+    --bg-orange-hover:  #b77e59;
+    --bg-black:         #000000;
+    --bg-cinza-1:       #757575;
+    --bg-cinza-2:       #F4F4F4;
+    --bg-white:         #FFFFFF;
+    --bg-yellow:        #FCB705;
+    --bg-roxo:        #E9008C;
+}
+html,
+body{
+    background-color: var(--bg-coffe-lg);
+    font-family: "Ruda", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Ajuste a altura conforme necessário */
+    object-fit: cover; /* Mantém a proporção e preenche o espaço */
+}

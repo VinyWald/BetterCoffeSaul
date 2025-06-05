@@ -1,0 +1,10 @@
+/*  Background navbar*/
+.bg-coffe{
+    color: var(--bg-coffe-lg);
+    background-color: var(--bg-coffe-md);
+}
+.bg-orange{
+    color:var(--bg-orange);
+    background-color: var(--bg-orange);
+}
+
