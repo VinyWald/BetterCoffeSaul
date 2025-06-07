@@ -1,7 +1,5 @@
+# coffeoffice/admin.py
 from django.contrib import admin
+from .models import OfficeItem
 
-# Register your models here.
-
-from . models import Op
-
-admin.site.register(Op)
+admin.site.register(OfficeItem)

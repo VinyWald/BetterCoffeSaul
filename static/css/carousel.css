@@ -18,3 +18,11 @@
         height: 400px;
     }
 }
+
+/* Adicione este código ao seu static/css/carousel.css */
+
+.carousel-item-img {
+    height: 60vh; /* Define uma altura para os slides (60% da altura da tela). Ajuste este valor como preferir (ex: 400px). */
+    object-fit: cover;  /* Esta é a propriedade principal: a imagem cobre o espaço, mantendo a proporção e cortando o excesso. */
+    object-position: center; /* Centraliza a imagem dentro do quadro, para que o corte seja equilibrado. */
+  }

@@ -1,23 +1,68 @@
- <!-- NavBar -->
- <nav class="navbar navbar-expand-lg navbar-light bg-coffe">
+{% comment %} templates/navbar.html {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid pt-1 pb-1">
-        <a href="#" class="navbar-brand fw-bold">Better Coffe Saul</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a href="{% url 'home:index' %}" class="navbar-brand fw-bold">BetterCoffeSaul</a>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent"
+            aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor"
                 class="bi bi-list" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                     d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
             </svg>
         </button>
-        <div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarNav">
+
+        <div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarNavContent">
             <ul class="navbar-nav">
-                <li class="nav-item d-block d-md-none d-lg-none pt-2 pb-2">
-                    <a href="./login.html" type="button" class="btn btn-orange w-100 rounded-0">Login</a>
+                <li class="nav-item me-lg-3">
+                    <a class="nav-link" href="{% url 'cardapio:index' %}">Cardápio</a>
                 </li>
-                <li class="nav-item d-none d-md-block d-lg-block">
-                    <a href="./login.html" type="button" class="btn btn-orange rounded-0 ps-lg-5 pe-lg-5">Login</a>
+                <li class="nav-item me-lg-3">
+                    <a href="{% url 'coffeoffice:office_list' %}" class="nav-link ">Office Coffee</a>
                 </li>
+               
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown me-lg-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Olá, {{ user.username|default:user.email }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+                            <li><a class="dropdown-item" href="#">Meu Perfil</a></li> {# Link para perfil (implementar no futuro) #}
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{% url 'logout' %}" method="post" style="margin-bottom: 0;"> {# Adicionado style para remover margem se necessário no dropdown #}
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item" style="border: none; background: none; padding: 0.25rem 1rem; width: 100%; text-align: left;">Logout</button>
+                                    {# O estilo acima tenta fazer o botão se parecer com um link do dropdown. Ajuste conforme necessário. #}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cart:view_cart' %}">
+                            <i class="fas fa-shopping-cart"></i>
+                            {% if user.cart and user.cart.items.count > 0 %}
+                            <span class="badge rounded-pill bg-color-orange">{{ user.cart.items.count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item d-none d-lg-block me-lg-2">
+                        <a href="{% url 'login' %}" type="button" class="btn btn-orange rounded-1 w-100">Login</a> {# Usei btn-primary como exemplo, pode ser 'btn-orange' se você definir essa classe #}
+                    </li>
+                    <li class="nav-item d-none d-lg-block">
+                        <a href="{% url 'home:signup' %}" type="button" class="btn btn-orange-outline rounded-1 w-100">Cadastro</a> {# Usei btn-outline-primary como exemplo #}
+                    </li>
+
+                    <li class="nav-item d-block d-lg-none pt-2 pb-1">
+                        <a href="{% url 'login' %}" type="button" class="btn btn-primary w-100 rounded-0">Login</a>
+                    </li>
+                    <li class="nav-item d-block d-lg-none pt-1 pb-2">
+                        <a href="{% url 'home:signup' %}" type="button" class="btn btn-outline-primary w-100 rounded-0">Cadastro</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

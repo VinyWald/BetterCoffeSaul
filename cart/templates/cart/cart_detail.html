@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Seu Carrinho{% endblock %}
+
+{% block content %}
+<div class="container mt-5 login-banner">
+    <h2>Seu Carrinho de Compras</h2>
+    {% if cart.items.all %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço Unitário</th>
+                    <th>Quantidade</th>
+                    <th>Total Item</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                <tr>
+                    <td>
+                        {% if item.cardapio_item %}
+                            <img src="{{ item.cardapio_item.foto.url }}" alt="{{ item.cardapio_item.nome }}" style="width: 50px; height: auto; margin-right: 10px;">
+                            {{ item.cardapio_item.nome }}
+                        {% elif item.office_item %}
+                            {% if item.office_item.foto %}
+                            <img src="{{ item.office_item.foto.url }}" alt="{{ item.office_item.nome }}" style="width: 50px; height: auto; margin-right: 10px;">
+                            {% endif %}
+                            {{ item.office_item.nome }}
+                        {% endif %}
+                    </td>
+                    <td>R$ {{ item.get_item_price|floatformat:2 }}</td>
+                    <td>
+                        <form action="{% url 'cart:update_cart_item' item.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="0" style="width: 60px;">
+                            <button type="submit" class="btn btn-orange-outline rounded-1 w-50">Atualizar</button>
+                        </form>
+                    </td>
+                    <td>R$ {{ item.get_total_item_price|floatformat:2 }}</td>
+                    <td>
+                        <a href="{% url 'cart:remove_from_cart' item.id %}" class="btn btn-orange-outline rounded-1 w-100">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-right">
+            <h4>Total do Carrinho: R$ {{ cart.get_total_price|floatformat:2 }}</h4>
+            <a href="{% url 'cardapio:index' %}" class="btn btn-orange-outline rounded-1 w-20">Continuar Comprando</a> {# Assumindo que 'index' é sua home page #}
+            <a href="#" class="btn btn-orange rounded-1 w-20">Finalizar Compra (Checkout)</a> {# Placeholder #}
+        </div>
+    {% else %}
+        <p>Seu carrinho está vazio.</p>
+        <a href="{% url 'cardapio:index' %}" class="btn btn-orange-outline rounded-1 w-20">Continuar Comprando</a> {# Assumindo que 'index' é sua home page #}
+    {% endif %}
+</div>
+{% endblock %}

@@ -4,9 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
+app_name = 'cardapio'
 
 urlpatterns = [
-    path('', views.index,name='indexCar'),
+    path('', views.index,name='index'),
     path('adicionar/', views.adc,name='adicionar'),
     path('detalhes/<int:pk>',views.detalhes,name="detalhes"),
     path('all/', views.indexall,name='all'), 

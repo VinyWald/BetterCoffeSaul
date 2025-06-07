@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-^95g&ts$0xg-veiwu15mkr)f#f@3btw5$vbpu4k!1n##+r)l&b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'home',
     'cardapio',
     'coffeoffice',
+    'cart',
+   
 ]
 
 MIDDLEWARE = [
@@ -91,18 +93,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    
 ]
 
 
@@ -130,3 +121,23 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Configurações para forçar HTTPS em produção (e bom ter para desenvolvimento)
+# ATENÇÃO: SECURE_SSL_REDIRECT = True pode causar loops de redirecionamento
+# se o seu proxy reverso (Nginx/Apache) não estiver configurado corretamente
+# para enviar o header X-Forwarded-Proto.
+# Com django-sslserver, a conexão já é HTTPS, mas é bom para prontidão de produção.
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Para uma segurança ainda maior em produção, considere HSTS (HTTP Strict Transport Security)
+# Descomente e ajuste quando estiver pronto para produção e após testes completos:
+# SECURE_HSTS_SECONDS = 31536000  # 1 ano
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+
+LOGIN_URL = 'login' # Nome da URL de login fornecida por django.contrib.auth.urls (geralmente /accounts/login/)
+                    # Ou 'login' se você nomeou a URL de login como 'login' no namespace global.
+                    # django.contrib.auth.urls nomeia como 'login'.
+LOGIN_REDIRECT_URL = '/'  # Para onde ir após o login bem-sucedido
+LOGOUT_REDIRECT_URL = '/' # Para onde ir após o logout

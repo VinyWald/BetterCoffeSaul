@@ -32,7 +32,7 @@
 }
 html,
 body{
-    background-color: var(--bg-coffe-lg);
+    background-color: #ffd5c0;
     font-family: "Ruda", sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -43,4 +43,14 @@ body{
     width: 100%;
     height: 200px; /* Ajuste a altura conforme necessário */
     object-fit: cover; /* Mantém a proporção e preenche o espaço */
+}
+/* static/css/style.css */
+a {
+    color: #ad8973; /* Cor padrão para todos os links */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #7f5539; /* Cor ao passar o mouse */
+    text-decoration: underline;
 }

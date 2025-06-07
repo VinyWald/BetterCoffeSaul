@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Meu Histórico de Pedidos{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <h2>Meu Histórico de Pedidos</h2>
+    <hr>
+    {% if pedidos %}
+        <p>Aqui está a lista dos seus pedidos:</p>
+        {# A lógica para exibir os pedidos virá aqui no futuro #}
+    {% else %}
+        <p>Você ainda não fez nenhum pedido.</p>
+        <p>Que tal começar agora? <a href="{% url 'cardapio:all' %}">Veja nosso cardápio!</a></p>
+    {% endif %}
+</div>
+{% endblock %}

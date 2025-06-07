@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{% url 'indexCar' %}">Home</a>
+                    <a href="{% url 'cardapio:index' %}">Home</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page">Cardápio</li>
             </ol>
@@ -49,9 +49,7 @@
                         </p>
 
                         <p class="card-text">{{ e.descricao }}</p>
-                        <a href="{% url 'detalhes' e.pk %}" class="btn btn-orange rounded-0 w-100">
-                            Verificar disponibilidade
-                        </a>
+                        <a href="{% url 'cart:add_cardapio_item_to_cart' e.id %}"  class="btn btn-orange rounded-0 w-100">Adicionar ao Carrinho</a>
                     </div>
                 </div> 
             </div>

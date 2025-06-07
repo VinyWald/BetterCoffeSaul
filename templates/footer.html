@@ -1,23 +1,21 @@
  <!-- Footer -->
- <footer class="w-100 bg-color-coffe">
+ <footer class="w-100 bg-light">
     <div class="container pt-5 pt-lg-5 pb-lg-3">
         <div class="row">
             <div class="col-12 col-md-3 col-lg-4 mb-3 mb-md-0 mb-lg-0">
                 <h4 class="fs-4 fw-bold text-uppercase mb-2 mb-md-4 mb-lg-4">Better Coffe Saul</h4>
-                <p class="text-muted">Somos uma empresa que nasceu no ano de 1999, cuja missão é entregar aos nossos
-                    clientes e parceiros os melhores lugares para ter um lazer e um descanso excelente e merecido.
-                </p>
+                <p class="text-muted"> Na Better Coffee Saul, transformamos a pausa para o café em uma experiência memorável. Oferecemos grãos selecionados, um ambiente acolhedor e um serviço que vai além da xícara, sempre com foco na qualidade e na inovação. </p>
                 <p>
-                    <a href="#" title="Facebook" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
+                    <a href="https://www.facebook.com/BetterCallSaulAMC/" title="Facebook" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
-                    <a href="#" title="Twitter" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
+                    <a href="https://x.com/BetterCallSaul?ref_src=twsrc%5Etfw" title="Twitter" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
-                    <a href="#" title="Instagram" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
+                    <a href="https://www.instagram.com/bettercallsaulamc/" title="Instagram" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
                         <i class="fa fa-instagram" aria-hidden="true"></i>
                     </a>
-                    <a href="#" title="Youtube" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
+                    <a href="https://www.youtube.com/watch?v=FAdiEjeNRi0" title="Youtube" class="text-decoration-none text-muted me-1 me-md-1 me-lg-2">
                         <i class="fa fa-youtube-play" aria-hidden="true"></i>
                     </a>
                 </p>
@@ -25,7 +23,7 @@
             <div class="col-12 col-md-3 col-lg-4 pe-lg-0 ps-lg-5 mb-3 mb-md-0 mb-lg-0">
                 <h4 class="fs-4 fw-bold mb-2 mb-md-4 mb-lg-4">Minha conta</h4>
                 <p class="mb-0 ">
-                    <a href="" class="text-decoration-none text-muted">Minhas viagens</a>
+                    <a href="{% url 'home:meu_historico' %}" class="text-decoration-none text-muted">Meu histórico</a>
                 </p>
                 <p class="mb-0 ">
                     <a href="" class="text-decoration-none text-muted">Meu perfil</a>
@@ -33,18 +31,10 @@
             </div>
             <div class="col-12 col-md-3 col-lg-4 mb-3 mb-md-0 mb-lg-0">
                 <h4 class="fs-4 fw-bold mb-2 mb-md-4 mb-lg-4">Informações adicionais</h4>
-                <p class="mb-0 ">
-                    <a href="" class="text-decoration-none text-muted">Termos e condições</a>
-                </p>
-                <p class="mb-0 ">
-                    <a href="" class="text-decoration-none text-muted">Política de privacidade</a>
-                </p>
-                <p class="mb-0 ">
-                    <a href="" class="text-decoration-none text-muted">Central de ajuda</a>
-                </p>
-                <p class="mb-0 ">
-                    <a href="" class="text-decoration-none text-muted">Condições de uso</a>
-                </p>
+                <p class="mb-0 "><a href="{% url 'home:termos_e_condicoes' %}"  class="text-decoration-none text-muted">Termos e condições</a></p>
+                <p class="mb-0 "><a href="{% url 'home:politica_de_privacidade' %}" class="text-decoration-none text-muted">Política de privacidade</a></p>
+                <p class="mb-0 "><a href="{% url 'home:central_de_ajuda' %}"  class="text-decoration-none text-muted">Central de ajuda</a></p>
+                
             </div>
         </div>
     </div>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Office Coffee - Produtos e Serviços{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Produtos e Serviços de Escritório</h2>
+    <div class="row">
+        {% for item in office_items %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if item.foto %}
+                    <img src="{{ item.foto.url }}" class="card-img-top" alt="{{ item.nome }}" style="max-height: 200px; object-fit: cover;">
+                {% else %}
+                    <img src="../../../media/fotos_cardapio/default.png" class="card-img-top" alt="Imagem Padrão" style="max-height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title mb-1">{{ item.nome }}</h5>
+                    <p class="card-text">{{ item.descricao|truncatewords:15 }}</p>
+                    <p class="card-text"><strong>Preço: R$ {{ item.preco|floatformat:2 }}</strong></p>
+                    <p class="card-text"><small class="text-muted">Tipo: {{ item.get_tipo_item_display }}</small></p>
+                    <a href="{% url 'cart:add_office_item_to_cart' item.id %}" class="btn btn-orange rounded-0 w-100">Adicionar ao Carrinho</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Nenhum item de escritório disponível no momento.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
