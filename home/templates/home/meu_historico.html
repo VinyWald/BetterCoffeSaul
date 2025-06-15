@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Meu Histórico de Pedidos{% endblock %}
 {% block content %}
-<div class="container my-5">
-    <h2>Meu Histórico de Pedidos</h2>
-    <hr>
-    {% if pedidos %}
-        <p>Aqui está a lista dos seus pedidos:</p>
-        {# A lógica para exibir os pedidos virá aqui no futuro #}
-    {% else %}
-        <p>Você ainda não fez nenhum pedido.</p>
-        <p>Que tal começar agora? <a href="{% url 'cardapio:all' %}">Veja nosso cardápio!</a></p>
-    {% endif %}
+<div class="login-page-wrapper">
+
+    {# O 'container' original agora fica aqui dentro, servindo apenas para centralizar o formulário #}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 bg-white p-4 rounded-2">
+                <h2>Meu Histórico de Pedidos</h2>
+                <hr>
+                {% if pedidos %}
+                <p>Aqui está a lista dos seus pedidos:</p>
+                {# A lógica para exibir os pedidos virá aqui no futuro #}
+                {% else %}
+                <p>Você ainda não fez nenhum pedido.</p>
+                <p>Que tal começar agora? <a href="{% url 'cardapio:all' %}">Veja nosso cardápio!</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -5,11 +5,13 @@ from django.contrib.auth.decorators import login_required
 from .models import Review
 from .forms import ReviewForm, CustomUserCreationForm # Adicione ReviewForm
 from django.contrib import messages  # Importe o framework de mensagens
+from .decorators import ssl_required
+
 
 # --- VIEW INDEX CORRIGIDA ---
 def index(request):
     # Busca as 3 últimas avaliações para exibir
-    reviews = Review.objects.all()[:3]
+    reviews = Review.objects.all()
     # Cria uma instância do formulário para ser usada no template
     review_form = ReviewForm()
     
@@ -24,33 +26,48 @@ def index(request):
 @login_required
 def add_review(request):
     if request.method == 'POST':
-        # Cria o formulário com os dados enviados
         form = ReviewForm(request.POST)
+
         if form.is_valid():
-            # Cria a instância da avaliação mas não salva no banco ainda
             review = form.save(commit=False)
-            # Associa o usuário logado à avaliação
             review.user = request.user
             review.save()
-            messages.success(request, 'Sua avaliação foi enviada com sucesso!')
+            # Envia uma mensagem de sucesso!
+            messages.success(request, 'Obrigado pela sua avaliação!')
             return redirect('cardapio:index')
         else:
-            # Se o formulário for inválido, recarrega a página inicial
-            # passando o formulário com os erros para que eles sejam exibidos.
-            reviews = Review.objects.all()[:3]
-            messages.error(request, 'Por favor, corrija os erros abaixo para enviar sua avaliação.')
-            context = {
-                'reviews': reviews,
-                'review_form': form, # Passa o formulário com os erros
-            }
-            return render(request, 'index.html', context)
-    
-    # Se o método não for POST, simplesmente redireciona para a home
+            # --- ESTA É A CORREÇÃO PRINCIPAL ---
+            # Se o formulário for inválido, mostre os erros como mensagens.
+            # Exemplo: "O campo de comentário não pode estar vazio."
+            for field, errors in form.errors.items():
+                for error in errors:
+                    # Adiciona cada erro como uma mensagem de alerta
+                    messages.error(request, f"{error}")
+            
+            # E então redireciona de volta, como antes.
+            return redirect('cardapio:index')
+
+    # Se não for POST, redireciona.
     return redirect('cardapio:index')
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.save()
+            # --- MUDANÇA CRUCIAL ---
+            # Redireciona para a página do CARDÁPIO, e não mais para a home.
+            return redirect('cardapio:index') 
+
+    # Se a requisição não for POST, também redireciona para a página do cardápio.
+    return redirect('cardapio:index')
+
 
 def signup_view(request):
     # ...
     pass
+
 def signup_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)

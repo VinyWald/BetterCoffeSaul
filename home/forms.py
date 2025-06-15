@@ -14,7 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 class ReviewForm(forms.ModelForm):
     rating = forms.IntegerField(
-        min_value=1, 
+        min_value=0, 
         max_value=5, 
         widget=forms.HiddenInput() # O input será escondido, usaremos CSS e JS para as estrelas
     )

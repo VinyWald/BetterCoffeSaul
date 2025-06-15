@@ -26,9 +26,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-^95g&ts$0xg-veiwu15mkr)f#f@3btw5$vbpu4k!1n##+r)l&b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','www.bettercoffesaul.com']
 
 
 # Application definition
@@ -114,9 +114,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -126,15 +132,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # se o seu proxy reverso (Nginx/Apache) não estiver configurado corretamente
 # para enviar o header X-Forwarded-Proto.
 # Com django-sslserver, a conexão já é HTTPS, mas é bom para prontidão de produção.
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False # Agora podemos ligar, pois o Nginx está correto
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 # Para uma segurança ainda maior em produção, considere HSTS (HTTP Strict Transport Security)
 # Descomente e ajuste quando estiver pronto para produção e após testes completos:
-# SECURE_HSTS_SECONDS = 31536000  # 1 ano
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_SECONDS = 0  # 1 ano
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
 LOGIN_URL = 'login' # Nome da URL de login fornecida por django.contrib.auth.urls (geralmente /accounts/login/)
                     # Ou 'login' se você nomeou a URL de login como 'login' no namespace global.
